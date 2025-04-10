@@ -1,6 +1,6 @@
 # ![Community Fundraising Platform](https://imgs.search.brave.com/75vJiNPqD8euxEnFX-DrHTjyAcJB1GRNkVvvNhVHDj8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvNTAwcC8w/MC82NC9kb25hdGlv/bi1jYXJkYm9hcmQt/Ym94ZXMtd2l0aC1j/bG90aGVzLWZvb2Qt/d2Vhci12ZWN0b3It/Mzk4NTAwNjQuanBn)
 
-# Community Fundraising Platform
+# Community People's Zone
 
 A simple yet powerful platform that allows people to create and contribute to local community initiatives and charitable causes. Built with Express.js, MongoDB Atlas, and Razorpay payment gateway.
 
