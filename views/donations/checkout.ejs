@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/header') %>
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-2xl mx-auto mt-12 px-4">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <div class="bg-blue-600 text-white px-6 py-4">
+        <h4 class="text-xl font-semibold">Donate to <%= campaign.title %></h4>
+      </div>
+      <div class="p-6">
+        <form id="donationForm">
+          <input type="hidden" id="campaignId" value="<%= campaign._id %>">
+          
+          <div class="mb-4">
+            <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">
+              Donation Amount (in ₹)
+            </label>
+            <input type="number" id="amount" min="10" value="100" required
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          
+          <button type="button" id="donateBtn"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">
+            Proceed to Payment
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('donateBtn').addEventListener('click', async function () {
+      const amount = document.getElementById('amount').value;
+      const campaignId = document.getElementById('campaignId').value;
+
+      try {
+        const orderResponse = await fetch('/donations/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount, campaignId })
+        });
+
+        const orderData = await orderResponse.json();
+
+        if (orderData.error) {
+          alert(orderData.error);
+          return;
+        }
+
+        const options = {
+          key: orderData.key,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: 'Community Fundraising',
+          description: 'Donation for <%= campaign.title %>',
+          order_id: orderData.orderId,
+          handler: async function (response) {
+            const verifyResponse = await fetch('/donations/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                amount: orderData.amount,
+                campaignId: campaignId
+              })
+            });
+
+            const verifyData = await verifyResponse.json();
+
+            if (verifyData.error) {
+              alert(verifyData.error);
+              return;
+            }
+
+            if (verifyData.success) {
+              alert('Payment successful! Thank you for your donation.');
+              window.location.href = `/campaigns/${verifyData.campaignId}`;
+            }
+          },
+          prefill: {
+            name: '<%= user.name %>',
+            email: '<%= user.email %>'
+          },
+          theme: {
+            color: '#3399cc'
+          }
+        };
+
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+
+      } catch (error) {
+        console.error(error);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

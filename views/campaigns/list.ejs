@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.tailwindcss.com"></script>
+<%- include('../partials/header') %>
+<body class="bg-gray-50 text-gray-800">
+  <div class="container mx-auto px-4 mt-10">
+    <h1 class="text-3xl font-bold mb-6">All Campaigns</h1>
+
+    <% if (user) { %>
+      <a href="/campaigns/create" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mb-6">
+        Create New Campaign
+      </a>
+    <% } %>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% if (campaigns.length > 0) { %>
+        <% campaigns.forEach(campaign => { %>
+          <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+              <h5 class="text-xl font-semibold"><%= campaign.title %></h5>
+              <h6 class="text-sm text-gray-500 mb-2">
+                by <%= campaign.creator.name %>
+              </h6>
+              <p class="text-gray-700 mb-4"><%= campaign.description.substring(0, 100) %>...</p>
+              
+              <% const progressPercent = (campaign.amountRaised / campaign.goal) * 100; %>
+              <div class="w-full bg-gray-200 rounded-full h-4 mb-3">
+                <div class="bg-green-500 h-4 rounded-full" style="width: <%= progressPercent %>%"></div>
+              </div>
+              
+              <p class="text-gray-800 font-medium mb-4">₹<%= campaign.amountRaised %> raised of ₹<%= campaign.goal %> goal</p>
+              
+              <a href="/campaigns/<%= campaign._id %>" class="block text-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
+                View Details
+              </a>
+            </div>
+            <div class="bg-gray-100 text-sm text-gray-600 px-4 py-2">
+              End Date: <%= new Date(campaign.endDate).toLocaleDateString() %>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="col-span-1 md:col-span-2 lg:col-span-3">
+          <div class="bg-blue-100 text-blue-800 p-4 rounded shadow">No campaigns found.</div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+<%- include('../partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= campaign.title %> - People's Zone </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-900 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">People's Zone </h1>
+        <a href="/" class="text-yellow-400 hover:underline">Home</a>
+      </div>
+    </nav>
+
+    <!-- Campaign Container -->
+    <div class="max-w-4xl mx-auto px-4 py-10">
+      <h1 class="text-3xl font-bold mb-2"><%= campaign.title %></h1>
+      <p class="text-sm text-gray-500 mb-6">
+        Created by <%= campaign.creator.name %> on <%= new Date(campaign.createdAt).toLocaleDateString() %>
+      </p>
+
+      <!-- Progress Bar -->
+      <% const progressPercent = (campaign.amountRaised / campaign.goal) * 100; %>
+      <div class="w-full bg-gray-200 rounded-full h-6 mb-4">
+        <div class="bg-yellow-400 h-6 rounded-full text-sm font-bold text-black text-center"
+             style="width: <%= progressPercent %>%;">
+          <%= progressPercent.toFixed(0) %>%
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+        <div>
+          <h4 class="text-xl font-semibold">₹<%= campaign.amountRaised %></h4>
+          <p class="text-gray-500">raised of ₹<%= campaign.goal %> goal</p>
+        </div>
+        <div>
+          <h4 class="text-xl font-semibold"><%= donations.length %></h4>
+          <p class="text-gray-500">supporters</p>
+        </div>
+        <div>
+          <% 
+            const now = new Date();
+            const endDate = new Date(campaign.endDate);
+            const daysLeft = Math.ceil((endDate - now) / (1000 * 60 * 60 * 24));
+          %>
+          <h4 class="text-xl font-semibold"><%= daysLeft > 0 ? daysLeft : 'Ended' %></h4>
+          <p class="text-gray-500"><%= daysLeft > 0 ? 'days left' : 'campaign ended' %></p>
+        </div>
+      </div>
+
+      <!-- Donate Button -->
+      <% if (user && daysLeft > 0) { %>
+        <a href="/donations/checkout/<%= campaign._id %>"
+           class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded shadow mb-6">
+          Donate Now
+        </a>
+      <% } else if (!user && daysLeft > 0) { %>
+        <a href="/login"
+           class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded shadow mb-6">
+          Login to Donate
+        </a>
+      <% } %>
+
+      <!-- About Campaign -->
+      <div class="bg-white p-6 rounded shadow mb-8">
+        <h2 class="text-xl font-bold mb-3">About this campaign</h2>
+        <p class="text-gray-700"><%= campaign.description %></p>
+      </div>
+
+      <!-- Recent Donations -->
+      <h3 class="text-2xl font-bold mb-4">Recent Donations</h3>
+
+      <% if (donations.length > 0) { %>
+        <div class="space-y-4">
+          <% donations.forEach(donation => { %>
+            <div class="bg-white p-4 rounded shadow flex justify-between items-start">
+              <div>
+                <h4 class="text-lg font-semibold">₹<%= donation.amount %></h4>
+                <p class="text-sm text-gray-500">from <%= donation.donor ? donation.donor.name : 'Anonymous' %></p>
+              </div>
+              <p class="text-sm text-gray-500"><%= new Date(donation.createdAt).toLocaleDateString() %></p>
+            </div>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <div class="bg-blue-100 text-blue-700 p-4 rounded">No donations yet. Be the first to donate!</div>
+      <% } %>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4 mt-10">
+      &copy; 2025 People's Zone. All rights reserved.
+    </footer>
+
+  </body>
+</html>

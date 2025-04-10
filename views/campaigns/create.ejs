@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Campaign - People's Zone </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-900 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">People's Zone</h1>
+        <a href="/" class="text-yellow-400 hover:underline">Home</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12">
+      <h2 class="text-3xl font-bold mb-8">Create a New Campaign</h2>
+      <div class="bg-white rounded shadow-lg p-8 max-w-3xl mx-auto">
+
+        <% if (typeof error !== 'undefined') { %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            <%= error %>
+          </div>
+        <% } %>
+
+        <form action="/campaigns" method="POST" class="space-y-6">
+          <div>
+            <label for="title" class="block font-medium mb-1">Campaign Title</label>
+            <input type="text" id="title" name="title" required
+              class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-yellow-400 focus:outline-none">
+          </div>
+          <div>
+            <label for="description" class="block font-medium mb-1">Description</label>
+            <textarea id="description" name="description" rows="5" required
+              class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-yellow-400 focus:outline-none"></textarea>
+          </div>
+          <div>
+            <label for="goal" class="block font-medium mb-1">Funding Goal (in ₹)</label>
+            <input type="number" id="goal" name="goal" min="1000" required
+              class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-yellow-400 focus:outline-none">
+          </div>
+          <div>
+            <label for="endDate" class="block font-medium mb-1">End Date</label>
+            <input type="date" id="endDate" name="endDate" required
+              class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-yellow-400 focus:outline-none">
+          </div>
+          <button type="submit"
+            class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 rounded shadow">
+            Create Campaign
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4 mt-10">
+      &copy; 2025 People's Zone . All rights reserved.
+    </footer>
+  </body>
+</html>
