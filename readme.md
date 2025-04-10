@@ -1,3 +1,5 @@
+# ![Community Fundraising Platform](https://via.placeholder.com/150) <!-- Replace with your project logo -->
+
 # Community Fundraising Platform
 
 A simple yet powerful platform that allows people to create and contribute to local community initiatives and charitable causes. Built with Express.js, MongoDB Atlas, and Razorpay payment gateway.
@@ -12,10 +14,10 @@ A simple yet powerful platform that allows people to create and contribute to lo
 
 ## Tech Stack
 
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB Atlas
-- **Payment Gateway**: Razorpay
-- **Frontend**: EJS, Tailwind CSS
+- **Backend**: ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+- **Database**: ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+- **Payment Gateway**: ![Razorpay](https://img.shields.io/badge/Razorpay-02042B?style=for-the-badge&logo=razorpay&logoColor=white)
+- **Frontend**: ![EJS](https://img.shields.io/badge/EJS-8A2BE2?style=for-the-badge&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 - **Authentication**: Session-based with express-session
 - **Password Security**: bcryptjs for hashing
 
