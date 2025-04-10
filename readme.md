@@ -3,7 +3,7 @@
   <h1 style="margin: 0;">People's Zone</h1>
 </div>
 
-# Community People's Zone
+
 
 A simple yet powerful platform that allows people to create and contribute to local community initiatives and charitable causes. Built with Express.js, MongoDB Atlas, and Razorpay payment gateway.
 
