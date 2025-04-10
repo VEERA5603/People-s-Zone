@@ -1,4 +1,7 @@
-# <img src="https://imgs.search.brave.com/75vJiNPqD8euxEnFX-DrHTjyAcJB1GRNkVvvNhVHDj8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvNTAwcC8w/MC82NC9kb25hdGlv/bi1jYXJkYm9hcmQt/Ym94ZXMtd2l0aC1j/bG90aGVzLWZvb2Qt/d2Vhci12ZWN0b3It/Mzk4NTAwNjQuanBn" alt="Community Fundraising Platform" width="50"> <h1>People's Zone</h1>
+<div style="display: flex; align-items: center;">
+  <img src="https://imgs.search.brave.com/75vJiNPqD8euxEnFX-DrHTjyAcJB1GRNkVvvNhVHDj8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvNTAwcC8w/MC82NC9kb25hdGlv/bi1jYXJkYm9hcmQt/Ym94ZXMtd2l0aC1j/bG90aGVzLWZvb2Qt/d2Vhci12ZWN0b3It/Mzk4NTAwNjQuanBn" alt="Community Fundraising Platform" width="50" style="margin-right: 10px;">
+  <h1 style="margin: 0;">People's Zone</h1>
+</div>
 
 # Community People's Zone
 
